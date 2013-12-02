@@ -1,0 +1,57 @@
+duplication rate is fixed.
+container size before unique: 1000000
+container size after unique: 256294
+
+
+Board::X = 6
+
+ptr_vector<Board>
+push_back part : 0.069503 [s]
+sort part : 0.370922 [s]
+unique part : 0.078181 [s]
+total : 0.518606 [s]
+
+boost::ptr_vector<Board>
+push_back part : 0.072485 [s]
+sort part : 0.386713 [s]
+unique part : 0.218071 [s]
+total : 0.677269 [s]
+
+std::vector<std::shared_ptr<Board>>
+push_back part : 0.086218 [s]
+sort part : 0.642371 [s]
+unique part : 0.128739 [s]
+total : 0.857328 [s]
+
+std::vector<Board>
+push_back part : 0.059823 [s]
+sort part : 0.211576 [s]
+unique part : 0.007175 [s]
+total : 0.278574 [s]
+
+
+Board::X = 48
+ptr_vector<Board>
+push_back part : 0.172904 [s]
+sort part : 0.619244 [s]
+unique part : 0.213124 [s]
+total : 1.00527 [s]
+
+boost::ptr_vector<Board>
+push_back part : 0.169518 [s]
+sort part : 0.641643 [s]
+unique part : 0.223588 [s]
+total : 1.03475 [s]
+
+std::vector<std::shared_ptr<Board>>
+push_back part : 0.202717 [s]
+sort part : 0.95824 [s]
+unique part : 0.294581 [s]
+total : 1.45554 [s]
+
+std::vector<Board>
+push_back part : 0.29652 [s]
+sort part : 0.791355 [s]
+unique part : 0.040261 [s]
+total : 1.12814 [s]
+
