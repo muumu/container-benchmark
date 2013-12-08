@@ -3,55 +3,145 @@ container size before unique: 1000000
 container size after unique: 256294
 
 
-Board::X = 6
+reserve無し
 
-ptr_vector<Board>
-push_back part : 0.069503 [s]
-sort part : 0.370922 [s]
-unique part : 0.078181 [s]
-total : 0.518606 [s]
+ptr_vector<Board> allocatorあり
+construct part : 7e-06 [s]
+push_back part : 0.074325 [s]
+sort part : 0.391621 [s]
+unique part : 0.032805 [s]
+destruct part : 0.061289 [s]
+total : 0.560047 [s]
 
-boost::ptr_vector<Board>
-push_back part : 0.072485 [s]
-sort part : 0.386713 [s]
-unique part : 0.218071 [s]
-total : 0.677269 [s]
-
-std::vector<std::shared_ptr<Board>>
-push_back part : 0.086218 [s]
-sort part : 0.642371 [s]
-unique part : 0.128739 [s]
-total : 0.857328 [s]
-
-std::vector<Board>
-push_back part : 0.059823 [s]
-sort part : 0.211576 [s]
-unique part : 0.007175 [s]
-total : 0.278574 [s]
-
-
-Board::X = 48
-ptr_vector<Board>
-push_back part : 0.172904 [s]
-sort part : 0.619244 [s]
-unique part : 0.213124 [s]
-total : 1.00527 [s]
+ptr_vector<Board> allocator無し
+construct part : 7e-06 [s]
+push_back part : 0.068693 [s]
+sort part : 0.392801 [s]
+unique part : 0.078938 [s]
+destruct part : 0.034415 [s]
+total : 0.574854 [s]
 
 boost::ptr_vector<Board>
-push_back part : 0.169518 [s]
-sort part : 0.641643 [s]
-unique part : 0.223588 [s]
-total : 1.03475 [s]
+construct part : 5e-06 [s]
+push_back part : 0.070112 [s]
+sort part : 0.403765 [s]
+unique part : 0.212148 [s]
+destruct part : 0.034424 [s]
+total : 0.720454 [s]
 
 std::vector<std::shared_ptr<Board>>
-push_back part : 0.202717 [s]
-sort part : 0.95824 [s]
-unique part : 0.294581 [s]
-total : 1.45554 [s]
+construct part : 7e-06 [s]
+push_back part : 0.089273 [s]
+sort part : 0.642372 [s]
+unique part : 0.130161 [s]
+destruct part : 0.028408 [s]
+total : 0.890221 [s]
 
 std::vector<Board>
-push_back part : 0.29652 [s]
-sort part : 0.791355 [s]
-unique part : 0.040261 [s]
-total : 1.12814 [s]
+construct part : 6e-06 [s]
+push_back part : 0.060388 [s]
+sort part : 0.203804 [s]
+unique part : 0.007892 [s]
+destruct part : 0.002344 [s]
+total : 0.274434 [s]
 
+
+reserve(LOOPSIZE)あり
+
+ptr_vector<Board> allocatorあり
+construct part : 2.3e-05 [s]
+push_back part : 0.070024 [s]
+sort part : 0.371239 [s]
+unique part : 0.030637 [s]
+destruct part : 0.063218 [s]
+total : 0.535141 [s]
+
+ptr_vector<Board> allocator無し (std::vector<T*>のラッパクラス)
+construct part : 2.3e-05 [s]
+push_back part : 0.066457 [s]
+sort part : 0.371079 [s]
+unique part : 0.077766 [s]
+destruct part : 0.03466 [s]
+total : 0.549985 [s]
+
+boost::ptr_vector<Board>
+construct part : 2.1e-05 [s]
+push_back part : 0.071755 [s]
+sort part : 0.379449 [s]
+unique part : 0.207713 [s]
+destruct part : 0.034785 [s]
+total : 0.693723 [s]
+
+std::vector<std::shared_ptr<Board>>
+construct part : 2.1e-05 [s]
+push_back part : 0.077148 [s]
+sort part : 0.643937 [s]
+unique part : 0.12915 [s]
+destruct part : 0.028509 [s]
+total : 0.878765 [s]
+
+std::vector<T>
+construct part : 2.2e-05 [s]
+push_back part : 0.041632 [s]
+sort part : 0.20418 [s]
+unique part : 0.007954 [s]
+destruct part : 0.002342 [s]
+total : 0.25613 [s]
+
+
+vector<uint64_t> BoardPlus::Code::codeのサイズが64の時
+reserve無し
+
+ptr_vector<BoardPlus>
+construct part : 9e-06 [s]
+push_back part : 0.241191 [s]
+sort part : 0.510528 [s]
+unique part : 0.300244 [s]
+destruct part : 0.066455 [s]
+total : 1.11843 [s]
+
+std::vector<BoardPlus>
+construct part : 9e-06 [s]
+push_back part : 0.38108 [s]
+sort part : 0.237584 [s]
+unique part : 0.197309 [s]
+destruct part : 0.089155 [s]
+total : 0.905137 [s]
+
+
+vector<uint64_t> BoardPlus::Code::codeのサイズが256の時
+reserve無し
+
+ptr_vector<BoardPlus>
+construct part : 1e-05 [s]
+push_back part : 0.644371 [s]
+sort part : 0.623017 [s]
+unique part : 0.191266 [s]
+destruct part : 0.071195 [s]
+total : 1.52986 [s]
+
+std::vector<BoardPlus>
+construct part : 9e-06 [s]
+push_back part : 1.19944 [s]
+sort part : 0.238605 [s]
+unique part : 0.25954 [s]
+destruct part : 0.177328 [s]
+total : 1.87492 [s]
+
+
+vector<uint64_t> BoardPlus::Code::codeのサイズが256の時
+reserve(LOOPSIZE)あり
+
+construct part : 3.5e-05 [s]
+push_back part : 0.643853 [s]
+sort part : 0.626082 [s]
+unique part : 0.193592 [s]
+destruct part : 0.071516 [s]
+total : 1.53508 [s]
+
+construct part : 2.5e-05 [s]
+push_back part : 0.618557 [s]
+sort part : 0.238724 [s]
+unique part : 0.252555 [s]
+destruct part : 0.111238 [s]
+total : 1.2211 [s]

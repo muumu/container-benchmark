@@ -21,7 +21,7 @@ public:
     Board(const Board& bd) : arr(bd.arr) {}
 
     void fill_rand() {
-        for (int i=0; i<6; ++i) { // loop size is constant for fixed duplication rate
+        for (int i=0; i<X; ++i) {
             arr[i] = (arr[i]+rand())%8;
         }
     }
@@ -48,6 +48,28 @@ public:
     }
 };
 
+class Code {
+    std::vector<uint64_t> code;
+public:
+    Code() : code(256) {}
+};
+
+class BoardPlus {
+    Board bd;
+    Code code;
+    unsigned data;
+public:
+    void fill_rand() {
+        bd.fill_rand();
+    }
+    bool operator<(const BoardPlus& bp) const {
+        return bd < bp.bd;
+    }
+    bool operator==(const BoardPlus& bp) const {
+        return bd == bp.bd;
+    }
+};
+
 
 template <typename Container>
 class ContainerWrapperBase {
@@ -55,6 +77,9 @@ protected:
     Container container_;
 public:
     virtual ~ContainerWrapperBase() {};
+    void reserve(int n) {
+        container_.reserve(n);
+    }
     size_t size() const {
         return container_.size();
     }
@@ -69,7 +94,7 @@ class ContainerWrapper<ptr_vector<T>> : public ContainerWrapperBase<ptr_vector<T
 public:
     typedef T Element;
     void push_back(const T& elem) {
-        container_.push_back(new T(elem));
+        container_.push_back(elem);
     }
     void sort() {
         container_.sort();
@@ -136,7 +161,8 @@ class ContainerBenchmark {
 public:
     void operator()(MyTimer& timer) {
         typename Container::Element elem;
-
+        container_.reserve(LOOPSIZE);
+        timer.stop(); // end of construct part
         timer.start("push_back part");
         timer.pause();
         for (int i=0; i<LOOPSIZE; ++i) {
@@ -145,36 +171,47 @@ public:
             container_.push_back(elem);
             timer.pause();
         }
-        timer.stop(); // push_back part end
+        timer.stop(); // end of push_back part
 
         timer.start("sort part");
         container_.sort();
-        timer.stop(); // sort part end
+        timer.stop(); // end od sort part
 
         std::cout << "container size before unique: " << container_.size() << std::endl;
         timer.start("unique part");
         container_.unique();
-        timer.stop(); // uniue part end
+        timer.stop(); // end of uniue part
 
         std::cout << "container size after unique: " << container_.size() << std::endl;
+        timer.start("destruct part");
     }
 };
 
 int main(int argc, char** argv) {
     int n = argc > 1 ? atoi(argv[1]) : 0;
+    //typedef Board T;
+    typedef BoardPlus T;
     MyTimer timer;
     switch (n) {
     case 1:
-        ContainerBenchmark<ContainerWrapper<ptr_vector<Board>>>()(timer);
+        timer.start("construct part");
+        ContainerBenchmark<ContainerWrapper<ptr_vector<T>>>()(timer);
+        timer.stop();
         break;
     case 2:
-        ContainerBenchmark<ContainerWrapper<boost::ptr_vector<Board>>>()(timer);
+        timer.start("construct part");
+        ContainerBenchmark<ContainerWrapper<boost::ptr_vector<T>>>()(timer);
+        timer.stop();
         break;
     case 3:
-        ContainerBenchmark<ContainerWrapper<std::vector<std::shared_ptr<Board>>>>()(timer);
+        timer.start("construct part");
+        ContainerBenchmark<ContainerWrapper<std::vector<std::shared_ptr<T>>>>()(timer);
+        timer.stop();
         break;
     case 4:
-        ContainerBenchmark<ContainerWrapper<std::vector<Board>>>()(timer);
+        timer.start("construct part");
+        ContainerBenchmark<ContainerWrapper<std::vector<T>>>()(timer);
+        timer.stop();
         break;
     }
     timer.showResults();

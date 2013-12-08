@@ -16,6 +16,9 @@ public:
         current_data.second = 0.0;
         gettimeofday(&start_timeval, NULL);
     }
+    void start() {
+        start(std::string("record") + std::to_string(records.size()));
+    }
     void pause() {
         gettimeofday(&end_timeval, NULL);
         current_data.second += getTimeDiff();
@@ -30,11 +33,13 @@ public:
     }
     void showResults() {
         double total = 0.0;
-        for(auto& record : records) {
+        for (auto& record : records) {
             std::cout << record.first << " : " << record.second << " [s]" << std::endl;
             total += record.second;
         }
-        std::cout << "total : " << total << " [s]" << std::endl;
+        if (records.size() > 1) {
+            std::cout << "total : " << total << " [s]" << std::endl;
+        }
     }
 private:
     double getTimeDiff() {
