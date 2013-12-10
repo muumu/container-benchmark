@@ -21,7 +21,7 @@ public:
     Board(const Board& bd) : arr(bd.arr) {}
 
     void fill_rand() {
-        for (int i=0; i<X; ++i) {
+        for (int i=0; i<6; ++i) {
             arr[i] = (arr[i]+rand())%8;
         }
     }
@@ -51,22 +51,25 @@ public:
 class Code {
     std::vector<uint64_t> code;
 public:
-    Code() : code(256) {}
+    Code() : code(1000) {}
 };
 
 class BoardPlus {
     Board bd;
-    Code code;
-    unsigned data;
+    //Code code;
+    unsigned value;
 public:
     void fill_rand() {
-        bd.fill_rand();
+        //bd.fill_rand();
+        value = rand() % 256500;
     }
     bool operator<(const BoardPlus& bp) const {
-        return bd < bp.bd;
+        //return bd < bp.bd;
+        return value < bp.value;
     }
     bool operator==(const BoardPlus& bp) const {
-        return bd == bp.bd;
+        //return bd == bp.bd;
+        return value == bp.value;
     }
 };
 
@@ -189,8 +192,8 @@ public:
 
 int main(int argc, char** argv) {
     int n = argc > 1 ? atoi(argv[1]) : 0;
-    //typedef Board T;
-    typedef BoardPlus T;
+    typedef Board T;
+    //typedef BoardPlus T;
     MyTimer timer;
     switch (n) {
     case 1:

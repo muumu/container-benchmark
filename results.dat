@@ -80,7 +80,7 @@ unique part : 0.12915 [s]
 destruct part : 0.028509 [s]
 total : 0.878765 [s]
 
-std::vector<T>
+std::vector<Board>
 construct part : 2.2e-05 [s]
 push_back part : 0.041632 [s]
 sort part : 0.20418 [s]
@@ -88,6 +88,87 @@ unique part : 0.007954 [s]
 destruct part : 0.002342 [s]
 total : 0.25613 [s]
 
+
+ptr_vector<BoardPlus>
+container size before unique: 1000000
+container size after unique: 251340
+construct part : 2.1e-05 [s]
+push_back part : 0.072361 [s]
+sort part : 0.198831 [s]
+unique part : 0.107616 [s]
+destruct part : 0.033964 [s]
+total : 0.412793 [s]
+
+std::vector<BoardPlus>
+container size before unique: 1000000
+container size after unique: 251340
+construct part : 8e-06 [s]
+push_back part : 0.041906 [s]
+sort part : 0.112273 [s]
+unique part : 0.005549 [s]
+destruct part : 0.004169 [s]
+total : 0.163905 [s]
+
+
+reserve(LOOPSIZE)あり
+Board::X = 64の時
+
+ptr_vector<Board>
+construct part : 2.1e-05 [s]
+push_back part : 0.204544 [s]
+sort part : 0.692445 [s]
+unique part : 0.264644 [s]
+destruct part : 0.07675 [s]
+total : 1.2384 [s]
+
+std::vector<Board>
+construct part : 2.4e-05 [s]
+push_back part : 0.183389 [s]
+sort part : 1.02005 [s]
+unique part : 0.054819 [s]
+destruct part : 0.032765 [s]
+total : 1.29104 [s]
+
+Board::X = 64の時
+
+ptr_vector<BoardPlus>
+container size before unique: 1000000
+container size after unique: 251340
+construct part : 2.1e-05 [s]
+push_back part : 0.208623 [s]
+sort part : 0.304392 [s]
+unique part : 0.171263 [s]
+destruct part : 0.072823 [s]
+total : 0.757122 [s]
+
+std::vector<BoardPlus>
+container size before unique: 1000000
+container size after unique: 251340
+construct part : 2.6e-05 [s]
+push_back part : 0.183198 [s]
+sort part : 0.89063 [s]
+unique part : 0.041651 [s]
+destruct part : 0.031124 [s]
+total : 1.14663 [s]
+
+
+Board::X = 256の時
+
+ptr_vector<Board>
+construct part : 2.3e-05 [s]
+push_back part : 0.589837 [s]
+sort part : 1.06585 [s]
+unique part : 0.5305 [s]
+destruct part : 0.124099 [s]
+total : 2.31031 [s]
+
+std::vector<Board>
+construct part : 2.5e-05 [s]
+push_back part : 0.662772 [s]
+sort part : 2.84075 [s]
+unique part : 0.207816 [s]
+destruct part : 0.106183 [s]
+total : 3.81755 [s]
 
 vector<uint64_t> BoardPlus::Code::codeのサイズが64の時
 reserve無し
@@ -107,6 +188,7 @@ sort part : 0.237584 [s]
 unique part : 0.197309 [s]
 destruct part : 0.089155 [s]
 total : 0.905137 [s]
+
 
 
 vector<uint64_t> BoardPlus::Code::codeのサイズが256の時
@@ -145,3 +227,4 @@ sort part : 0.238724 [s]
 unique part : 0.252555 [s]
 destruct part : 0.111238 [s]
 total : 1.2211 [s]
+
